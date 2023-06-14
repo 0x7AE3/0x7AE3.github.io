@@ -68,6 +68,14 @@
             var asterisk = document.querySelector(".asterisk");
             var hiddenText = document.querySelector(".hidden-text");
 
+            asterisk.addEventListener("mouseenter", function() {
+                hiddenText.style.display = "inline";
+            });
+            asterisk.addEventListener("mouseleave", function() {
+                hiddenText.style.display = "none";
+            });
+
+            /*
             asterisk.addEventListener("click", function() {
                 if (hiddenText.style.display === "none") {
                     hiddenText.style.display = "inline";
@@ -75,6 +83,7 @@
                     hiddenText.style.display = "none";
                 }
             });
+            */
         });
     </script>
 </html>
