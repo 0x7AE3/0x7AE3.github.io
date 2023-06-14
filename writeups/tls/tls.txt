@@ -1,0 +1,23 @@
+reference: https://stackoverflow.com/questions/470523/how-does-ssl-really-work
+more detailed: https://security.stackexchange.com/questions/20803/how-does-ssl-tls-work
+
+level 1 mitm:
+1. client requests certificate (c1) from example.com
+2. attacker intercepts request and returns their own certificate for example.com with a different public key (a1) (and the attacker of course holds the corresponding private key (b1)), allowing the attacker to decrypt all subsequent traffic. moreover, they can route the request to a different ip address (their own server) and perform a phishing attack
+
+the solution to prevent this sort of thing from happening, is to have a certificate authority (CA) create a digital signature of the certificate (c1) with their own private key (b2). the magic of the signature is that the corresponding public key (a2) can be used to determine whether or not a CA has signed a certificate. now, if a client wants to connect to example.com, it first requests a certificate from them (c1) and then checks the validity of the certificate using the CA's public key (a2). there is one problem: how does a client reliably receive the CA's public key (a2)? consider the following scenario:
+
+level 2 mitim:
+1. client requests certificate (c1) from example.com
+2. client requests CA public key from a CA named Verisign
+3. attacker intercepts this request and returns their own public key (a3)
+
+this new public key (a3) can be used by an attacker to digitally sign arbitrary certificates, meaning the next time a certificate (c1) for a website is requested, an attacker can return their own certificate that the client will view as digitally signed (because they are using the attacker's version of the CA public key)
+
+as you can observe, one can keep chaining CAs but there will always be a "root CA", a CA that isn't signed by another CA, which are usually "self signed" (the public key of the CA signs the CA itself, I wonder how you would generate that). thus computers (OSs) usually come out of the box with a few industry trusted root CAs. the next time the client wants to initiate a TLS connection with a website, it requests a certificate, checks if it is digitally signed through another certificate, checks if that is digitally signed, and so on, until it reaches a self-signing certificate, which it then checks is part of the list of the industry trusted root CAs. the onlyMITM attack that is possible then is to intercept a computer delivery and modify the trusted root CAs somehow.
+
+questions to consider:
+1. how should a CA go about revoking an erroneously signed certificate?
+2. what happens if an entire CA, such as Verisign, becomes compromised? i.e., their systems are broken into and the private key they use to digitally sign other certificates is leaked/found out. note this doesn't affect just Verisign customers (website sysadmins who use Verisign to digitally sign their certificates they give out to clients initiating connections), a website that uses a different CA to sign their certificate can still have a certificate forged under the name of their website through Verisign
+
+note in practice, assymetric cryptography is only used for the initial certificate request. once trust is established between both parties, they can use a symmetric key (shared secret, which is safely shared through assymetric cryptography) to encrypt/decrypt the rest of the traffic. note that this is optimal because symmetric key cryptography is computationally faster than assymetric key cryptography. 

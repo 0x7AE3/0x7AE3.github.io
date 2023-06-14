@@ -1,0 +1,14 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Definition of Affine Space}
+An affine space consists of the following: a set $A$, a vector space $\vec{A}$, and a transitive and free action of the additive group of $\vec{A}$ on the set $A$. Generally, the set $A$ is used to refer to \emph{the} affine space, and its elements are called \emph{points}, whereas the vector space $\vec{A}$ is said to be \emph{associated} to the affine space, and its elements are referred to as \emph{vectors, translations,} or sometimes \emph{free vectors}.
+
+Recall that a (right) group action of a group $G$ on a set $X$ is a function $\alpha: X \times G \to X$ such that $\alpha(x, e) = e$ and $\alpha(\alpha(x, g), h) = \alpha(x, gh) ~ \forall x \in X, \forall g, h \in G$, where $e \in G$ is the identity element. The action is transitive if $\forall x, y \in X$, there exists a $g \in G$ such that $\alpha(x, g) = y$. The action is free if $\alpha(x, g) = x \implies g = e$ for all pairs of elements $x \in X, g \in G$ where $g$ fixes $x$ under the action. In other words, an action is free when no element of $X$ is fixed by a non-identity element of $G$.
+
+Note that an action being both transitive and free is equivalent to the condition that for every $x \in X$, the mapping $\alpha(x, -)$ is a bijection.
+
+\end{document}
