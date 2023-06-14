@@ -1,0 +1,4 @@
+html tags: meta, link, nav, div, a, button, ul, li, h1, svg, defs, filter, feColorMatrix, feOffset, animate, feBlend, script
+css props: cursor, display, margin-left, margin-right, width, filter, color, font-size, text-align, text-shadow
+
+I used Bootstrap for the nav-bar, and I used Javascript to persist the state of the glitch-toggle between pages of the site.

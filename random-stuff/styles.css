@@ -1,0 +1,26 @@
+body {
+    cursor: crosshair;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.glitch {
+    -webkit-filter: url("#glitch"); /* for safari */
+    filter: url("#glitch");
+}
+
+.text {
+    display: inline-block;
+    color: black;
+    font-size: 100%;
+    text-align: center;
+}
+
+#main_page {
+    text-shadow: 0.5px 0.5px #ff0000;
+}

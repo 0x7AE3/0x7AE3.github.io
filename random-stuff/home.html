@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="styles.css" rel="stylesheet">
+        <title> home </title>
+    </head>
+    <body>
+        <!-- followed along this bootstrap tutorial: https://www.youtube.com/watch?v=4sosXZsdy-s&ab_channel=TraversyMedia -->
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark glitch can_glitch">
+            <div class="container">
+                <a href="home.html" class="navbar-brand glitch can_glitch"> home </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#hamburger">
+                    <span class="navbar-toggler-icon glitch can_glitch"> </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="hamburger">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="math.html" class="nav-link glitch can_glitch"> math </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="dkong.html" class="nav-link glitch can_glitch"> dkong </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="yoshi.html" class="nav-link glitch can_glitch"> yoshi </a>
+                        </li>
+                        <button type="button" class="btn btn-info btn-outline-dark glitch can_glitch" id="toggle" onclick="change()"> glitch toggle </button>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h1 class="glitch can_glitch center text" id="main_page"> my collection of random ! </h1>
+
+        <!-- used https://codepen.io/lbebber/pen/qEjRYd as reference -->
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+              <filter id="glitch" x="0" y="0">
+                  <feColorMatrix in="SourceGraphic" mode="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r" />
+
+                  <feOffset in="r" result="r" dx="-1">
+                      <animate attributeName="dx" attributeType="XML" values="0; -1.5; 0; -1.5; 0; -1; 0" dur="0.2s" repeatCount="indefinite"/>
+                  </feOffset>
+
+                  <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+
+                  <feOffset in="g" result="g" dx="-1">
+                      <animate attributeName="dx" attributeType="XML" values="0; -1.5; 0; -1.5; 0; -1; 0" dur="0.5s" repeatCount="indefinite"/>
+                  </feOffset>
+
+                  <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+
+                  <feOffset in="b" result="b" dx="+1">
+                      <animate attributeName="dx" attributeType="XML" values="0; -1.5; 0; -1.5; 0; -1; 0" dur="0.7s" repeatCount="indefinite"/>
+                  </feOffset>
+
+                  <feBlend in="r" in2="g" mode="screen" result="blend" />
+                  <feBlend in="blend" in2="b" mode="screen" result="blend" />
+              </filter>
+            </defs>
+        </svg>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script>
+            if (localStorage.getItem("toggle_status") == null) {
+                localStorage.setItem("toggle_status", "true");
+            }
+
+            function preserve() {
+                let button = document.getElementById('toggle');
+                const all_elements = document.getElementsByTagName('*');
+                if (localStorage.getItem("toggle_status") == "false") {
+                    for (let element of all_elements) {
+                        if (element.classList.contains("glitch") && element.classList.contains("can_glitch")) {
+                            element.classList.remove("glitch");
+                        }
+                    }
+                    localStorage.setItem("toggle_status", "false");
+                }
+                else {
+                    for (let element of all_elements) {
+                      if (!element.classList.contains("glitch") && element.classList.contains("can_glitch")) {
+                        element.classList.add("glitch");
+                      }
+                    }
+                    localStorage.setItem("toggle_status", "true");
+                }
+            };
+
+            preserve();
+
+            function change() {
+                let button = document.getElementById('toggle');
+                const all_elements = document.getElementsByTagName('*');
+                if (localStorage.getItem("toggle_status") == "true") {
+                    for (let element of all_elements) {
+                        if (element.classList.contains("glitch") && element.classList.contains("can_glitch")) {
+                            element.classList.remove("glitch");
+                        }
+                    }
+                    localStorage.setItem("toggle_status", "false");
+                }
+                else {
+                    for (let element of all_elements) {
+                      if (!element.classList.contains("glitch") && element.classList.contains("can_glitch")) {
+                        element.classList.add("glitch");
+                      }
+                    }
+                    localStorage.setItem("toggle_status", "true");
+                }
+            }
+        </script>
+    </body>
+    </html>
